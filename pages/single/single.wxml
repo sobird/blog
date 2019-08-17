@@ -1,0 +1,23 @@
+<view class="container single">
+  <view class="article">
+    <view >
+      <view class="title">JavaScript 内存管理机制</view>
+    </view>
+    
+    <view class="content">
+      每种编程语言都有它的内存管理机制，比如C语言底层一般有内存管理接口malloc()和free()。JavaScript是在创建变量（对象，字符串等）时自动进行了分配内存，并且在不使用它们时“自动”释放，释放的过程称为垃圾回收。正因为这种自动“释放”内存的机制，让JavaScript开发者错误的认为他们可以不用关心内存管理，实际上包括我自己在实际的JS项目开发中也很少关注其内存管理问题。
+    </view>
+
+    <view class="footer">
+      <view class="categories">
+        <text></text>
+      </view>  · 
+      <text>323 查看</text> · <text>12 评论</text>
+
+      <view class="tags">
+        <text>技术</text>
+        <text>深拷贝</text>
+      </view>
+    </view>
+  </view>
+</view>

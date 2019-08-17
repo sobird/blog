@@ -1,38 +1,22 @@
 /**index.wxss**/
-.article{
-  background: #fff;
-  padding: 15rpx 20rpx;
-  margin-bottom: 10px;
-}
-.article:active{
+
+.home .article:active{
   background: #ddd;
 }
-.article .title{
-  font-weight: bold;
-}
-.article .categories{
-  display: inline-block;
-}
-.article .tags{
-  float: right;
-  
-}
-.article .tags text{
-  background: #dfe2e5;
-  color: #666;
-  border-radius: 2px;
-  box-shadow: inset 0 -1px 0 rgba(27,31,35,.12);
-  padding: 0rpx 10rpx;
-  font-size: 22rpx;
-  margin-left: 5rpx;
+
+.home .icon-more{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 5rpx;
+  animation: load 2s linear infinite;
+  line-height: 20rpx;
 }
 
-.article .excerpt{
-  font-size: 28rpx;
-  margin: 5px 0;
-}
-
-.article .footer{
-  font-size: 24rpx;
-  color: #909090;
+ @-webkit-keyframes load{
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
 }

@@ -1,24 +1,38 @@
 <!--index.wxml-->
 <import src="../../wxParse/wxParse.wxml"/>
 
-<view class="container">
-  <view bindtap="bindViewTap" class="article" wx:for="{{articles}}" wx:key="index">
+<view class="container home">
+  <view bindtap="bindViewTap" class="article" wx:for="{{articles}}" wx:for-item="post" wx:key="{{post.id}}" data-id="{{post.id}}">
     <view >
-      <view class="title">{{item.title.rendered}}</view>
+      <view class="title">{{post.title.rendered}}</view>
     </view>
     
     <view class="excerpt">
-      <template is="wxParse" data="{{wxParseData:item.excerptParsed}}"/>
+      <template is="wxParse" data="{{wxParseData:post.excerptParsed}}"/>
     </view>
 
     <view class="footer">
-      <view class="categories">技术</view>  · 
-      <text>323 查看</text> · <text>12 评论</text>
+      <view class="categories">
+        <text 
+        wx:for="{{post.categories}}" 
+        wx:for-item="category" 
+        wx:key="{{category.term_id}}">{{category.name}}</text>
+      </view>  · 
+      <text>{{post.post_meta.views[0]}} 查看</text> · <text>{{post.comment_count}} 评论</text>
 
       <view class="tags">
-        <text>技术</text>
-        <text>深拷贝</text>
+        <text 
+        wx:for="{{post.tags}}" 
+        wx:for-index="tag_index" 
+        wx:for-item="tag" 
+        wx:key="{{tag.term_id}}"
+        wx:if="{{tag_index < 4}}">{{tag.name}}</text>
       </view>
     </view>
+  </view>
+
+  <view class="load-more" hidden="{{hideMore}}">
+    <image class="icon-more" src="/assets/more.png" />
+    <text>加载中</text>
   </view>
 </view>

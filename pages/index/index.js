@@ -2,22 +2,20 @@
 var WxParse = require('../../wxParse/wxParse.js');
 
 //获取应用实例
-const app = getApp()
+const app = getApp();
+
+let page = 1;
 
 Page({
   data: {
     articles: [],
-    motto: '',
+    hideMore: true,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
   onPullDownRefresh() {
-    wx.showToast({
-      title: 'loading...',
-      icon: 'loading'
-    })
-    console.log('onPullDownRefresh', new Date())
+    //wx.showNavigationBarLoading();
   },
   stopPullDownRefresh() {
     wx.stopPullDownRefresh({
@@ -27,70 +25,59 @@ Page({
       }
     })
   },
+  onReachBottom() {
+    var self = this;
+    self.setData({
+      hideMore: false
+    });
+
+    page++;
+    
+    this.getPosts(page);
+  },
 
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function (event) {
+    var id = event.currentTarget.dataset['id'];
+
     wx.navigateTo({
-      url: '../single/single'
+      url: '../single/single?postId=' + id
     })
   },
   onLoad: function () {
-    const self = this
-    
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+    const self = this;
 
-    // 请求最近文章
+    this.getPosts();
+  },
+
+  // 获取文章列表
+  getPosts: function( page = 1) {
+    var self = this;
+    var url = 'https://sobird.me/wp-json/wp/v2/posts?page=' + page;
+
     wx.request({
-      url: "https://sobird.me/wp-json/wp/v2/posts",
+      url: url,
       data: {
         noncestr: Date.now()
       },
       success(result) {
-        wx.showToast({
-          title: '请求成功',
-          icon: 'success',
-          mask: true,
-          duration: 2000,
-        })
+
         self.setData({
           loading: false
         })
 
         var data = result.data || [];
-        data.filter(function(item) {
+        var oldData = self.data.articles;
+
+
+        data.filter(function (item) {
           var excerpt = WxParse.wxParse('excerpt', 'html', item.excerpt.rendered, self, 5);
           item.excerptParsed = excerpt;
-
-          console.log(excerpt);
         });
 
         self.setData({
-          articles: data
+          articles: oldData.concat(data),
+          hideMore: true
         })
       },
 
@@ -101,20 +88,5 @@ Page({
         })
       }
     })
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-
-  _wxParse: function() {
-    var self = this;
-    WxParse.wxParse('motto', 'html', '<view>Hello World</view>', self, 5);
-
-    return '11'
   }
 })
