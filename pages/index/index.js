@@ -1,14 +1,21 @@
 //index.js
+var WxParse = require('../../wxParse/wxParse.js');
+
+console.log(WxParse);
+
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
     articles: [],
-    motto: 'Hello World',
+    motto: '',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    test: function(){
+      return '1212'
+    }
   },
   onPullDownRefresh() {
     wx.showToast({
@@ -61,6 +68,10 @@ Page({
       })
     }
 
+    var test = WxParse.wxParse('motto', 'html', '<view>Hello World</view>', self, 5);
+
+    console.log(test);
+
     // 请求最近文章
     wx.request({
       url: "https://sobird.me/wp-json/wp/v2/posts",
@@ -78,8 +89,16 @@ Page({
           loading: false
         })
 
+        var data = result.data || [];
+        data.filter(function(item) {
+          var excerpt = WxParse.wxParse('excerpt', 'html', item.excerpt.rendered, self, 5);
+          item.excerptParsed = excerpt;
+
+          console.log(excerpt);
+        });
+
         self.setData({
-          articles: result.data
+          articles: data
         })
       },
 
@@ -98,5 +117,12 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+
+  _wxParse: function() {
+    var self = this;
+    WxParse.wxParse('motto', 'html', '<view>Hello World</view>', self, 5);
+
+    return '11'
   }
 })

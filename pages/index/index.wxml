@@ -1,4 +1,6 @@
 <!--index.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+
 <view class="container">
   <view class="article" wx:for="{{articles}}" wx:key="index">
     <view>
@@ -6,7 +8,9 @@
     </view>
     
 
-    <view class="excerpt">{{item.excerpt.rendered}}</view>
+    <view class="excerpt">
+      <template is="wxParse" data="{{wxParseData:item.excerptParsed}}"/>
+    </view>
 
     <view class="footer">
       <view class="categories">技术</view>  · 
