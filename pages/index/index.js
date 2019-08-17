@@ -22,6 +22,9 @@ Page({
         articles: data
       });
 
+      // 存储文章数据
+      wx.setStorageSync('articles', data);
+
       wx.stopPullDownRefresh({
         complete(res) {
           // todo nothing
@@ -40,9 +43,12 @@ Page({
     
     this.getPosts(page, function(data) {
       var oldData = self.data.articles;
+      var tmpData = oldData.concat(data);
+
+      wx.setStorageSync('articles', tmpData);
 
       self.setData({
-        articles: oldData.concat(data),
+        articles: tmpData,
         hideMore: true
       });
     });
@@ -75,7 +81,7 @@ Page({
       success(result) {
 
         self.setData({
-          loading: false
+          hideMore: true
         })
 
         var data = result.data || [];
@@ -92,13 +98,14 @@ Page({
           self.setData({
             articles: data
           });
+          wx.setStorageSync('articles', data);
         }
       },
 
       fail({ errMsg }) {
         console.log('request fail', errMsg)
         self.setData({
-          loading: false
+          hideMore: true
         })
       }
     })
