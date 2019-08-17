@@ -4,10 +4,12 @@
     "pages/logs/logs"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark",
     "navigationBarTitleText": "傻鸟的博客",
-    "navigationBarTextStyle": "black"
+    "backgroundColor": "#F8F8F8"
+    
   },
   "tabBar": {
     "color": "#7A7E83",

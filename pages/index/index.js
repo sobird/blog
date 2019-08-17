@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   data: {
+    articles: [],
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -60,9 +61,9 @@ Page({
       })
     }
 
-    // 网络请求
+    // 请求最近文章
     wx.request({
-      url: "https://sobird.me",
+      url: "https://sobird.me/wp-json/wp/v2/posts",
       data: {
         noncestr: Date.now()
       },
@@ -76,7 +77,10 @@ Page({
         self.setData({
           loading: false
         })
-        console.log('request success', result)
+
+        self.setData({
+          articles: result.data
+        })
       },
 
       fail({ errMsg }) {
