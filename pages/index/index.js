@@ -15,16 +15,21 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
   onPullDownRefresh() {
-    //wx.showNavigationBarLoading();
+    var self = this;
+
+    this.getPosts(1, function(data) {
+      self.setData({
+        articles: data
+      });
+
+      wx.stopPullDownRefresh({
+        complete(res) {
+          // todo nothing
+        }
+      })
+    });
   },
-  stopPullDownRefresh() {
-    wx.stopPullDownRefresh({
-      complete(res) {
-        wx.hideToast()
-        console.log(res, new Date())
-      }
-    })
-  },
+
   onReachBottom() {
     var self = this;
     self.setData({
@@ -33,7 +38,14 @@ Page({
 
     page++;
     
-    this.getPosts(page);
+    this.getPosts(page, function(data) {
+      var oldData = self.data.articles;
+
+      self.setData({
+        articles: oldData.concat(data),
+        hideMore: true
+      });
+    });
   },
 
   //事件处理函数
@@ -51,7 +63,7 @@ Page({
   },
 
   // 获取文章列表
-  getPosts: function( page = 1) {
+  getPosts: function( page = 1, callback) {
     var self = this;
     var url = 'https://sobird.me/wp-json/wp/v2/posts?page=' + page;
 
@@ -67,18 +79,20 @@ Page({
         })
 
         var data = result.data || [];
-        var oldData = self.data.articles;
-
 
         data.filter(function (item) {
           var excerpt = WxParse.wxParse('excerpt', 'html', item.excerpt.rendered, self, 5);
           item.excerptParsed = excerpt;
         });
 
-        self.setData({
-          articles: oldData.concat(data),
-          hideMore: true
-        })
+
+        if (callback) {
+          callback(data);
+        } else {
+          self.setData({
+            articles: data
+          });
+        }
       },
 
       fail({ errMsg }) {
