@@ -6,7 +6,7 @@ const app = getApp();
 
 Page({
   data: {
-    articles: [],
+    post: {},
     comments: [],
   },
 
@@ -17,7 +17,15 @@ Page({
 
     console.log(postId);
 
-    // 请求最近文章
+    var articles = wx.getStorageSync('articles') || [];
+
+    var post = articles[articles.findIndex(function(item) {
+      return item.id == postId;
+    })];
+
+    self.setData({
+      post: article
+    });
     
     // 请求文章评论
     this.getPostComments(postId);
@@ -25,6 +33,7 @@ Page({
   
   // 获取文章评论
   getPostComments:  function(postId) {
+    var self = this;
     wx.request({
       url: "https://sobird.me/wp-json/wp/v2/comments",
       data: {
