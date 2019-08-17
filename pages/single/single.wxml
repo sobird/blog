@@ -17,7 +17,7 @@
     </view>
     
     <view class="content">
-      <template is="wxParse" data="{{wxParseData:post.contentParsed}}"/>
+      <rich-text nodes="{{post.content.rendered}}"></rich-text>
     </view>
 
     <view class="footer">

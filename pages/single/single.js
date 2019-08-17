@@ -23,6 +23,8 @@ Page({
       return item.id == postId;
     })];
 
+    console.log(post.contentParsed)
+
     self.setData({
       post: post
     });
