@@ -1,8 +1,6 @@
 //index.js
 var WxParse = require('../../wxParse/wxParse.js');
 
-console.log(WxParse);
-
 //获取应用实例
 const app = getApp()
 
@@ -13,9 +11,6 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    test: function(){
-      return '1212'
-    }
   },
   onPullDownRefresh() {
     wx.showToast({
@@ -32,10 +27,11 @@ Page({
       }
     })
   },
+
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../single/single'
     })
   },
   onLoad: function () {
@@ -67,10 +63,6 @@ Page({
         }
       })
     }
-
-    var test = WxParse.wxParse('motto', 'html', '<view>Hello World</view>', self, 5);
-
-    console.log(test);
 
     // 请求最近文章
     wx.request({

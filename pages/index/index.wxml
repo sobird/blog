@@ -2,12 +2,11 @@
 <import src="../../wxParse/wxParse.wxml"/>
 
 <view class="container">
-  <view class="article" wx:for="{{articles}}" wx:key="index">
-    <view>
+  <view bindtap="bindViewTap" class="article" wx:for="{{articles}}" wx:key="index">
+    <view >
       <view class="title">{{item.title.rendered}}</view>
     </view>
     
-
     <view class="excerpt">
       <template is="wxParse" data="{{wxParseData:item.excerptParsed}}"/>
     </view>
