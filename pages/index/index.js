@@ -88,7 +88,10 @@ Page({
 
         data.filter(function (item) {
           var excerpt = WxParse.wxParse('excerpt', 'html', item.excerpt.rendered, self, 5);
+          var content = WxParse.wxParse('content', 'html', item.content.rendered, self, 5);
+
           item.excerptParsed = excerpt;
+          item.contentParsed = content;
         });
 
 

@@ -24,7 +24,7 @@ Page({
     })];
 
     self.setData({
-      post: article
+      post: post
     });
     
     // 请求文章评论
