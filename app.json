@@ -6,8 +6,40 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "傻鸟的博客",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/home_icon.png",
+        "selectedIconPath": "assets/home_icon_selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "iconPath": "assets/tech_icon.png",
+        "selectedIconPath": "assets/tech_icon_selected.png",
+        "text": "技术"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "iconPath": "assets/life_icon.png",
+        "selectedIconPath": "assets/life_icon_selected.png",
+        "text": "生活"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "iconPath": "assets/about_icon.png",
+        "selectedIconPath": "assets/about_icon_selected.png",
+        "text": "关于"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

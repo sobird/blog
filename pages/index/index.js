@@ -9,6 +9,21 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+  onPullDownRefresh() {
+    wx.showToast({
+      title: 'loading...',
+      icon: 'loading'
+    })
+    console.log('onPullDownRefresh', new Date())
+  },
+  stopPullDownRefresh() {
+    wx.stopPullDownRefresh({
+      complete(res) {
+        wx.hideToast()
+        console.log(res, new Date())
+      }
+    })
+  },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
@@ -16,6 +31,8 @@ Page({
     })
   },
   onLoad: function () {
+    const self = this
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -42,6 +59,33 @@ Page({
         }
       })
     }
+
+    // 网络请求
+    wx.request({
+      url: "https://sobird.me",
+      data: {
+        noncestr: Date.now()
+      },
+      success(result) {
+        wx.showToast({
+          title: '请求成功',
+          icon: 'success',
+          mask: true,
+          duration: 2000,
+        })
+        self.setData({
+          loading: false
+        })
+        console.log('request success', result)
+      },
+
+      fail({ errMsg }) {
+        console.log('request fail', errMsg)
+        self.setData({
+          loading: false
+        })
+      }
+    })
   },
   getUserInfo: function(e) {
     console.log(e)

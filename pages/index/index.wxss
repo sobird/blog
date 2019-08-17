@@ -1,4 +1,11 @@
 /**index.wxss**/
+.article{
+  display: flex;
+  background: #fff;
+  height: 50px;
+  width: 100%;
+  margin-top: 10px;
+}
 .userinfo {
   display: flex;
   flex-direction: column;
