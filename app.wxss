@@ -16,7 +16,7 @@ page {
   box-sizing: border-box;
 } 
 
-.container .article:active{
+.list .article:active{
   background: #ddd;
 }
 

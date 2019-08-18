@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container home">
+<view class="container list home">
   <view bindtap="bindViewTap" class="article" wx:for="{{articles}}" wx:for-item="post" wx:key="{{post.id}}" data-id="{{post.id}}">
     <view class="header">
       <view class="title">{{post.title.rendered}}</view>
