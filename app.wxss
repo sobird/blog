@@ -92,7 +92,6 @@ page {
 
 .article .content .h3 {
   font-size: 32rpx;
-  border-bottom: 1px solid #eaecef;
 }
 
 .article .content .h4 {

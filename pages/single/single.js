@@ -21,13 +21,8 @@ Page({
       return item.id == postId;
     })];
 
-    console.log(post.contentParsed);
-
-    var contentNode = self.convertRichTextNode(post.contentParsed);
-
-    console.log(contentNode);
-
-    post.contentNode = contentNode;
+    // var contentNode = self.convertRichTextNode(post.contentParsed);
+    // post.contentNode = contentNode;
 
     self.setData({
       post: post
@@ -76,7 +71,6 @@ Page({
         
         if(node.nodes) {
           convertNode(node.nodes, tmp.children);
-          
         } 
       });
     }
