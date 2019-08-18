@@ -23,7 +23,7 @@ Page({
       return item.id == postId;
     })];
 
-    console.log(post.contentParsed)
+    var contentNode = self.convertRichTextNode(post.contentParsed);
 
     self.setData({
       post: post
@@ -31,6 +31,73 @@ Page({
     
     // 请求文章评论
     this.getPostComments(postId);
+  },
+
+  convertRichTextNode: function (contentNode) {
+    console.log(contentNode);
+    
+    var newNode = [];
+
+    function convertNode(contentNode, child) {
+      var _tmp = [];
+
+      contentNode.forEach(function (node, index) {
+        var type = node.node;
+
+        var tagName = node.tag;
+        var nodeClass = '';
+        if (node.attr && node.attr.class) {
+          nodeClass = node.attr.class;
+        }
+
+        var _newNode = {};
+
+        if(type === 'text') {
+          _newNode = {
+            type: 'text',
+            attrs: {
+              class: nodeClass + ' text'
+            },
+            text: node.text
+          };
+
+        } else {
+          _newNode = {
+            name: tagName,
+            attrs: {
+              class: nodeClass + ' ' + tagName
+            }
+          };
+        }
+
+        
+        
+        if(node.nodes) {
+          var children = convertNode(node.nodes, _newNode);
+          _newNode.children = children;
+
+          console.log('children', children);
+          
+          newNode.push(node);
+
+          
+        } else {
+          
+        }
+
+        _tmp.push(_newNode);
+      });
+
+
+      return _tmp;
+    }
+
+    convertNode(contentNode);
+
+
+    console.log('newNode', newNode);
+
+    return newNode;
   },
   
   // 获取文章评论
