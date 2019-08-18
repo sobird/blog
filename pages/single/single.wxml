@@ -17,7 +17,7 @@
     </view>
     
     <view class="content">
-      <rich-text nodes="{{post.content.rendered}}"></rich-text>
+      <rich-text nodes="{{post.post_content}}"></rich-text>
     </view>
 
     <view class="footer">

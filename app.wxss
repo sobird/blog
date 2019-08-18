@@ -65,3 +65,78 @@ page {
   font-size: 24rpx;
   color: #909090;
 }
+
+/** 文章详情 富文本样式 **/
+.article .content{
+  font-size: 28rpx;
+}
+.article .content .h1, 
+.article .content .h2, 
+.article .content .h3, 
+.article .content .h4, 
+.article .content .h5, 
+.article .content .h6 {
+  margin-top: 20rpx;
+  margin-bottom: 15rpx;
+  line-height: 1.25;
+  padding-bottom: 10rpx;
+}
+.article .content .h1 {
+  font-size: 40rpx;
+  border-bottom: 1px solid #eaecef;
+}
+.article .content .h2 {
+  font-size: 36rpx;
+  border-bottom: 1px solid #eaecef;
+}
+
+.article .content .h3 {
+  font-size: 32rpx;
+  border-bottom: 1px solid #eaecef;
+}
+
+.article .content .h4 {
+  font-size: 28rpx;
+}
+
+.article .content .h5 {
+  font-size: 24rpx;
+}
+
+.article .content .h6 {
+  font-size: 20rpx;
+}
+.article .content .pre {
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+.article .content .pre .code {
+  background: 0 0;
+  padding: 0;
+}
+.article .content .code, .article .content .pre {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-size: 12px;
+}
+
+.article .content .code {
+  padding: .05em .05rem;
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+}
+
+.article .content .blockquote {
+  border-left: 8rpx solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 20rpx;
+  background: #F7F7F7;
+  margin-bottom: 15rpx;
+}
+
+.article .content .img {
+  max-width: 100%;
+}

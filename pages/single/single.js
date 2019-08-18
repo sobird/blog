@@ -15,15 +15,19 @@ Page({
 
     var postId = options.postId;
 
-    console.log(postId);
-
     var articles = wx.getStorageSync('articles') || [];
 
     var post = articles[articles.findIndex(function(item) {
       return item.id == postId;
     })];
 
+    console.log(post.contentParsed);
+
     var contentNode = self.convertRichTextNode(post.contentParsed);
+
+    console.log(contentNode);
+
+    post.contentNode = contentNode;
 
     self.setData({
       post: post
@@ -34,68 +38,49 @@ Page({
   },
 
   convertRichTextNode: function (contentNode) {
-    console.log(contentNode);
-    
     var newNode = [];
 
-    function convertNode(contentNode, child) {
-      var _tmp = [];
-
-      contentNode.forEach(function (node, index) {
+    function convertNode(contentNode, newNode) {
+      contentNode.forEach(function (node) {
+        var tmp = {};
         var type = node.node;
-
         var tagName = node.tag;
-        var nodeClass = '';
-        if (node.attr && node.attr.class) {
-          nodeClass = node.attr.class;
-        }
+        var attrs = {};
 
-        var _newNode = {};
+        node.attr && Object.assign(attrs, node.attr);
+
+        switch (tagName) {
+          case 'wxxxcode-style':
+            tagName = 'code';
+            break;
+          default:
+            // todo nothing
+        } 
 
         if(type === 'text') {
-          _newNode = {
-            type: 'text',
-            attrs: {
-              class: nodeClass + ' text'
-            },
+          tmp = {
+            type,
             text: node.text
-          };
-
+          }
         } else {
-          _newNode = {
+          attrs.class = tagName;
+
+          tmp = {
             name: tagName,
-            attrs: {
-              class: nodeClass + ' ' + tagName
-            }
-          };
+            attrs,
+            children: []
+          }
         }
 
-        
+        newNode.push(tmp);
         
         if(node.nodes) {
-          var children = convertNode(node.nodes, _newNode);
-          _newNode.children = children;
-
-          console.log('children', children);
+          convertNode(node.nodes, tmp.children);
           
-          newNode.push(node);
-
-          
-        } else {
-          
-        }
-
-        _tmp.push(_newNode);
+        } 
       });
-
-
-      return _tmp;
     }
-
-    convertNode(contentNode);
-
-
-    console.log('newNode', newNode);
+    convertNode(contentNode, newNode);
 
     return newNode;
   },
