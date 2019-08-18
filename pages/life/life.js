@@ -63,7 +63,9 @@ Page({
   onLoad: function (options) {
     const self = this;
 
-    console.log(options);
+    wx.showLoading({
+      title: '加载中',
+    });
 
     this.getPosts();
   },
@@ -79,6 +81,7 @@ Page({
         noncestr: Date.now()
       },
       success(result) {
+        wx.hideLoading();
 
         self.setData({
           hideMore: true
@@ -97,7 +100,7 @@ Page({
       },
 
       fail({ errMsg }) {
-        // todo nothing
+        wx.hideLoading();
       }
     })
   }

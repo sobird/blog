@@ -12,6 +12,10 @@ Page({
   onLoad: function () {
     const self = this;
 
+    wx.showLoading({
+      title: '加载中',
+    });
+
     this.getAboutPage();
     
     // 请求文章评论
@@ -26,6 +30,8 @@ Page({
         noncestr: Date.now()
       },
       success(result) {
+        wx.hideLoading();
+        
         var data = result.data || [];
 
         self.setData({
@@ -34,7 +40,7 @@ Page({
       },
 
       fail({ errMsg }) {
-        // todo nothing
+        wx.hideLoading();
       }
     })
   },

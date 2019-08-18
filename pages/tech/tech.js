@@ -60,10 +60,12 @@ Page({
       url: '../single/single?postId=' + id
     })
   },
-  onLoad: function (options) {
+  onLoad: function () {
     const self = this;
 
-    console.log(options);
+    wx.showLoading({
+      title: '加载中',
+    });
 
     this.getPosts();
   },
@@ -79,10 +81,11 @@ Page({
         noncestr: Date.now()
       },
       success(result) {
+        wx.hideLoading();
 
         self.setData({
           hideMore: true
-        })
+        });
 
         var data = result.data || [];
 
@@ -97,7 +100,7 @@ Page({
       },
 
       fail({ errMsg }) {
-        // todo nothing
+        wx.hideLoading();
       }
     })
   }
