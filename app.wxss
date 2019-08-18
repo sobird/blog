@@ -16,6 +16,27 @@ page {
   box-sizing: border-box;
 } 
 
+.container .article:active{
+  background: #ddd;
+}
+
+.container .icon-more{
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 5rpx;
+  animation: load 2s linear infinite;
+  line-height: 20rpx;
+}
+
+ @-webkit-keyframes load{
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
+
 .load-more{
   text-align: center;
   padding: 5px 0;

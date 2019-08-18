@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/life/life",
+    "pages/tech/tech",
     "pages/single/single",
-    "pages/logs/logs"
+    "pages/about/about"
   ],
   "window": {
     "navigationBarBackgroundColor": "#F8F8F8",
@@ -25,19 +27,19 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "iconPath": "assets/tech_icon.png",
-        "selectedIconPath": "assets/tech_icon_selected.png",
-        "text": "技术"
-      },
-      {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/life/life",
         "iconPath": "assets/life_icon.png",
         "selectedIconPath": "assets/life_icon_selected.png",
         "text": "生活"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/tech/tech",
+        "iconPath": "assets/tech_icon.png",
+        "selectedIconPath": "assets/tech_icon_selected.png",
+        "text": "技术"
+      },
+      {
+        "pagePath": "pages/about/about",
         "iconPath": "assets/about_icon.png",
         "selectedIconPath": "assets/about_icon_selected.png",
         "text": "关于"

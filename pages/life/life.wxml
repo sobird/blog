@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+
+<view class="container home">
+  <view bindtap="bindViewTap" class="article" wx:for="{{articles}}" wx:for-item="post" wx:key="{{post.id}}" data-id="{{post.id}}">
+    <view class="header">
+      <view class="title">{{post.title.rendered}}</view>
+      <view class="meta">
+        <view class="categories">
+          <text 
+          wx:for="{{post.categories}}" 
+          wx:for-item="category" 
+          wx:key="{{category.term_id}}">{{category.name}}</text>
+        </view>  · 
+        <text>{{post.date_format}}</text> · 
+        <text>{{post.post_meta.views[0]}} 查看</text> · <text>{{post.comment_count}} 评论</text>
+      </view>
+    </view>
+    <view class="excerpt">
+      <template is="wxParse" data="{{wxParseData:post.excerptParsed}}"/>
+    </view>
+
+    <view class="footer">
+      <view class="tags">
+          <text 
+          wx:for="{{post.tags}}" 
+          wx:for-index="tag_index" 
+          wx:for-item="tag" 
+          wx:key="{{tag.term_id}}"
+          wx:if="{{tag_index < 6}}">{{tag.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="load-more" hidden="{{hideMore}}">
+    <image class="icon-more" src="/assets/more.png" />
+    <text>加载中</text>
+  </view>
+</view>

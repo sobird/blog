@@ -1,0 +1,32 @@
+<view class="container page">
+  <view class="article">
+    <view class="header">
+      <view class="title">{{post.title.rendered}}</view>
+      <view class="meta">
+        <view class="categories">
+          <text 
+          wx:for="{{post.categories}}" 
+          wx:for-item="category" 
+          wx:key="{{category.term_id}}">{{category.name}}</text>
+        </view>  · 
+        <text>{{post.date_format}}</text> · 
+        <text>{{post.post_meta.views[0]}} 查看</text> · <text>{{post.comment_count}} 评论</text>
+      </view>
+    </view>
+    
+    <view class="content">
+      <rich-text nodes="{{post.post_content}}"></rich-text>
+    </view>
+
+    <view class="footer">
+      <view class="tags">
+          <text 
+          wx:for="{{post.tags}}" 
+          wx:for-index="tag_index" 
+          wx:for-item="tag" 
+          wx:key="{{tag.term_id}}"
+          wx:if="{{tag_index < 6}}">{{tag.name}}</text>
+      </view>
+    </view>
+  </view>
+</view>

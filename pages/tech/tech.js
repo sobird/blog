@@ -17,7 +17,7 @@ Page({
   onPullDownRefresh() {
     var self = this;
 
-    this.getPosts(1, function(data) {
+    this.getPosts(1, function (data) {
       self.setData({
         articles: data
       });
@@ -40,8 +40,8 @@ Page({
     });
 
     page++;
-    
-    this.getPosts(page, function(data) {
+
+    this.getPosts(page, function (data) {
       var oldData = self.data.articles;
       var tmpData = oldData.concat(data);
 
@@ -70,10 +70,10 @@ Page({
     this.getPosts();
   },
 
-  // 获取文章列表
-  getPosts: function( page = 1, callback) {
+  // 获取技术文章列表
+  getPosts: function (page = 1, callback) {
     var self = this;
-    var url = 'https://sobird.me/wp-json/wp/v2/posts?page=' + page;
+    var url = 'https://sobird.me/wp-json/wp/v2/posts?categories=148&page=' + page;
 
     wx.request({
       url: url,
