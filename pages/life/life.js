@@ -1,6 +1,4 @@
 //index.js
-var WxParse = require('../../wxParse/wxParse.js');
-
 //获取应用实例
 const app = getApp();
 
@@ -88,15 +86,6 @@ Page({
 
         var data = result.data || [];
 
-        data.filter(function (item) {
-          var excerpt = WxParse.wxParse('excerpt', 'html', item.excerpt.rendered, self, 5);
-          var content = WxParse.wxParse('content', 'html', item.content.rendered, self, 5);
-
-          item.excerptParsed = excerpt;
-          item.contentParsed = content;
-        });
-
-
         if (callback) {
           callback(data);
         } else {
@@ -108,10 +97,7 @@ Page({
       },
 
       fail({ errMsg }) {
-        console.log('request fail', errMsg)
-        self.setData({
-          hideMore: true
-        })
+        // todo nothing
       }
     })
   }

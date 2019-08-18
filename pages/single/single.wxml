@@ -1,5 +1,3 @@
-<import src="../../wxParse/wxParse.wxml"/>
-
 <view class="container single">
   <view class="article">
     <view class="header">

@@ -1,6 +1,4 @@
 //index.js
-var WxParse = require('../../wxParse/wxParse.js');
-
 //获取应用实例
 const app = getApp();
 
@@ -10,9 +8,6 @@ Page({
   data: {
     articles: [],
     hideMore: true,
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
   },
   onPullDownRefresh() {
     var self = this;
@@ -62,10 +57,8 @@ Page({
       url: '../single/single?postId=' + id
     })
   },
-  onLoad: function (options) {
+  onLoad: function () {
     const self = this;
-
-    console.log(options);
 
     this.getPosts();
   },
@@ -87,15 +80,6 @@ Page({
         })
 
         var data = result.data || [];
-
-        data.filter(function (item) {
-          var excerpt = WxParse.wxParse('excerpt', 'html', item.excerpt.rendered, self, 5);
-          var content = WxParse.wxParse('content', 'html', item.content.rendered, self, 5);
-
-          item.excerptParsed = excerpt;
-          item.contentParsed = content;
-        });
-
 
         if (callback) {
           callback(data);
