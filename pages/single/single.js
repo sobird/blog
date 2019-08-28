@@ -28,6 +28,16 @@ Page({
     
     // 请求文章评论
     this.getPostComments(postId);
+
+    wx.previewImage({
+      current: 'https://sobird.me/wp-content/uploads/2019/08/IMG_2408-1024x768.jpg', // 当前显示图片的http链接
+      urls: ['https://sobird.me/wp-content/uploads/2019/08/IMG_2408-1024x768.jpg', 'https://sobird.me/wp-content/uploads/2019/08/IMG_2409-1024x768.jpg'] // 需要预览的图片http链接列表
+    })
+  },
+
+  // 文章点击
+  tap(e) {
+    console.log(e)
   },
 
   convertRichTextNode: function (contentNode) {

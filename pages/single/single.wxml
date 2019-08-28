@@ -15,7 +15,7 @@
     </view>
     
     <view class="content">
-      <rich-text nodes="{{post.post_content}}"></rich-text>
+      <rich-text nodes="{{post.post_content}}" bindtap="tap"></rich-text>
     </view>
 
     <view class="footer">

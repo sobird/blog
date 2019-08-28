@@ -46,6 +46,14 @@ page {
 /** 博客全局样式 **/
 
 /** 文章相关样式 **/
+.ul, ol {
+  margin: 0;
+  padding: 0 40rpx;
+}
+.a {
+  color: #666;
+  text-decoration: underline;
+}
 .article{
   background: #fff;
   padding: 15rpx 20rpx;
@@ -160,3 +168,32 @@ page {
 .article .content .img {
   max-width: 100%;
 }
+
+/* 表格样式 */
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.th {
+  background: #E8EAEF;
+}
+.td, .th {
+  border: 1px solid #dfe2e5;
+  padding: 3px 6px;
+}
+.th, .td {
+  text-align:left;
+}
+.table .th{
+  //padding: 6px 13px;
+  font-weight: bold;
+}
+.table tr{
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+.table td{
+  border: 1px solid #dfe2e5;
+}
+
